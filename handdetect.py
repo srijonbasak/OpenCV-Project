@@ -33,12 +33,12 @@ class handDetect():
       result = self.hands.process(rgb_img)
       landmarklist = []
       if result.multi_hand_landmarks:
-        for id, lm in result.multi_hand_landmarks:
-
-
-
-
-
+        myhand = result.multi_hand_landmarks[handno]
+        for id, lm in enumerate(myhand.landmarks):
+          h, w, c = img.shape
+          cx, cy = int(lm.x*w), int(lm.y*h)
+          landmarklist.append([id,cx,cy])
+      return landmarklist
 
 def main():
   cap = cv2.VideoCapture(0)#webcam
